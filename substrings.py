@@ -47,6 +47,9 @@ def count_length_of_all_substr(string):
     return count
 
 
+def optimized_get_all_substrings(string):
+  pass
+
 
 
 # test
