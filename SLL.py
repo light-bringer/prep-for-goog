@@ -24,10 +24,19 @@ class Node(object):
         
 
 
+
+class LengthMetaclass(type):
+
+    def __len__(self):
+        return self.clslength()
+
 class SingleLinkedList(object):
+
+    __metaclass__ = LengthMetaclass
     
     def __init__(self):
         self.ll = None
+        self.size = 0
 
     def insert(self, value):
         node = Node(value)
@@ -38,6 +47,8 @@ class SingleLinkedList(object):
             temp.next  = node        
         else:
             self.ll = node
+        
+        self.size += 1
             
     
     def print(self):
@@ -45,6 +56,25 @@ class SingleLinkedList(object):
         while temp:
             print(temp.get_data() + " -> " )
             temp = temp.get_next()
+    
+    def __len__(self):
+        return self.size
+
+
+    def search(self, value):
+        counter = 0
+        temp = self.ll
+        found = False
+        while temp:
+            if temp.get_data() == value:
+                print("data found at index: {0}".format(counter))
+                found = True
+            counter += 1
+            temp = temp.next
+        if found:
+            print("Found")
+        else:
+            print("Not Found..")
 
 
 abc = SingleLinkedList()
@@ -52,4 +82,7 @@ abc.insert(2)
 abc.insert(21)
 abc.insert("hi")
 
+
 abc.print()
+print(len(abc))
+abc.search("hi")
